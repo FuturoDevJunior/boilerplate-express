@@ -1,3 +1,4 @@
+require('dotenv').config();
 let express = require('express');
 let app = express();
 
@@ -14,7 +15,13 @@ app.get('/', function(req, res) {
 });
 
 app.get('/json', function(req, res) {
-  res.json({ message: 'Hello json' });
+  let message = 'Hello json';
+  // Log para debug no Render
+  console.log('DEBUG MESSAGE_STYLE:', process.env.MESSAGE_STYLE);
+  if (process.env.MESSAGE_STYLE === 'uppercase') {
+    message = message.toUpperCase();
+  }
+  res.json({ message });
 });
 
 module.exports = app;
